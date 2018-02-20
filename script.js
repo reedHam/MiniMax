@@ -3,6 +3,7 @@ var playerTurns = {
     Min: "min"
 }
 
+// init game tree
 var Root = new GameNode("A", playerTurns.Max);
 
 Root.addNode("B", playerTurns.Min);
@@ -21,7 +22,7 @@ Root.children[2].addNode("L", playerTurns.Max).value = 14;
 Root.children[2].addNode("M", playerTurns.Max).value = 5;
 Root.children[2].addNode("N", playerTurns.Max).value = 2;
 
-
+// DEBUG
 function printTree(node){
     console.log(node.name, node.value);
     if(node.children.length > 0){
