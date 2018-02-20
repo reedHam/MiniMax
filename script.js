@@ -2,25 +2,38 @@ var playerTurns = {
     Max: "max",
     Min: "min"
 }
-
+var negInfinity = Number.NEGATIVE_INFINITY;
+var infinity = Infinity;
 // init game tree
 var Root = new GameNode("A", playerTurns.Max);
 
 Root.addNode("B", playerTurns.Min);
 Root.addNode("C", playerTurns.Min);
-Root.addNode("D", playerTurns.Min);
 
-Root.children[0].addNode("E", playerTurns.Max).value = 3;
-Root.children[0].addNode("F", playerTurns.Max).value = 12;
-Root.children[0].addNode("G", playerTurns.Max).value = 8;
+// B
+Root.children[0].addNode("D", playerTurns.Max);
+Root.children[0].addNode("E", playerTurns.Max);
 
-Root.children[1].addNode("H", playerTurns.Max).value = 2;
-Root.children[1].addNode("I", playerTurns.Max).value = 4;
-Root.children[1].addNode("J", playerTurns.Max).value = 6;
+// D
+Root.children[0].children[0].addNode("", playerTurns.min).value = 3;
+Root.children[0].children[0].addNode("", playerTurns.min).value = 5;
 
-Root.children[2].addNode("L", playerTurns.Max).value = 14;
-Root.children[2].addNode("M", playerTurns.Max).value = 5;
-Root.children[2].addNode("N", playerTurns.Max).value = 2;
+// E
+Root.children[0].children[1].addNode("", playerTurns.min).value = 6;
+Root.children[0].children[1].addNode("", playerTurns.min).value = 9;
+
+// C
+Root.children[1].addNode("F", playerTurns.Max);
+Root.children[1].addNode("G", playerTurns.Max);
+
+// F
+Root.children[1].children[0].addNode("", playerTurns.min).value = 1;
+Root.children[1].children[0].addNode("", playerTurns.min).value = 2;
+
+// G
+Root.children[1].children[1].addNode("", playerTurns.min).value = 0;
+Root.children[1].children[1].addNode("", playerTurns.min).value = -1;
+
 
 // DEBUG
 function printTree(node){
@@ -35,4 +48,4 @@ function printTree(node){
 
 printTree(Root);
 
-console.log(miniMax(Root));
+console.log(miniMax(Root, negInfinity, infinity));

@@ -7,27 +7,37 @@
 */
 
 
-function miniMax(nodeState){
+function miniMax(nodeState, alpha, beta){
+    
     // return utility if terminal
     if (nodeState.children.length == 0){
+        
         return nodeState.value;
     }
 
     // find max miniMax for children
     if(nodeState.state == playerTurns.Max){
-        let maxArray = [];
-        nodeState.children.forEach(element => {
-            maxArray.push(miniMax(element));
+        var maxVal = negInfinity;
+        nodeState.children.some(function (child) {
+            let val = miniMax(child, alpha, beta);
+            maxVal = Math.max(maxVal, val);
+            alpha = Math.max(maxVal, alpha);
+
+            return beta <= alpha;
         });
-        return Math.max.apply(Math, maxArray);
+        return maxVal;
     }
 
     // find max miniMax for children
     if(nodeState.state == playerTurns.Min){
-        let minArray = [];
-        nodeState.children.forEach(element => {
-            minArray.push(miniMax(element));
+        var minVal = Infinity;
+        nodeState.children.some(function (child) {
+            let val = miniMax(child, alpha, beta);
+            minVal = Math.min(minVal, val);
+            beta = Math.min(minVal, beta);
+
+            return beta <= alpha;
         });
-        return Math.min.apply(Math, minArray);
+        return minVal;
     }
 }
